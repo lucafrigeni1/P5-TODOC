@@ -32,7 +32,7 @@ public abstract class TodocDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static Callback prepopulateDatabase(){
+    public static Callback prepopulateDatabase(){
         return new Callback() {
 
             @Override

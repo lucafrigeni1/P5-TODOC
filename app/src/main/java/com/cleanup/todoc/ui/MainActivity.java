@@ -46,10 +46,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     private EditText dialogEditText = null;
     @Nullable
     private Spinner dialogSpinner = null;
-    @SuppressWarnings("NullableProblems")
     @NonNull
     private RecyclerView listTasks;
-    @SuppressWarnings("NullableProblems")
     @NonNull
     private TextView lblNoTasks;
     private FloatingActionButton addTask;

@@ -5,7 +5,6 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
 
 import com.cleanup.todoc.model.Task;
 
@@ -18,8 +17,8 @@ public interface TaskDao {
     LiveData<List<Task>> getTasks();
 
     @Insert
-    long insertTask(Task task);
+    void insertTask(Task task);
 
     @Delete
-    int deleteTask(Task task);
+    void deleteTask(Task task);
 }

@@ -1,8 +1,9 @@
-package com.cleanup.todoc;
+package com.cleanup.todoc.DatabaseTest;
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.arch.persistence.room.Room;
 
+import com.cleanup.todoc.DatabaseTest.LiveDataTestUtils;
 import com.cleanup.todoc.database.TodocDatabase;
 import com.cleanup.todoc.model.Task;
 
@@ -18,6 +19,8 @@ import java.util.List;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
+import static com.cleanup.todoc.database.TodocDatabase.prepopulateDatabase;
+import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
@@ -34,6 +37,7 @@ public class TaskDaoTest {
     public void initDb() throws Exception {
         this.database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(),
                 TodocDatabase.class)
+                .addCallback(prepopulateDatabase())
                 .allowMainThreadQueries()
                 .build();
     }
@@ -54,7 +58,8 @@ public class TaskDaoTest {
         this.database.taskDao().insertTask(TASK_TEST);
         List<Task> tasks = LiveDataTestUtils.getValue(this.database.taskDao().getTasks());
         assertEquals(1, tasks.size());
-        this.database.taskDao().deleteTask(TASK_TEST);
+        this.database.taskDao().deleteTask(tasks.get(0));
+        tasks = LiveDataTestUtils.getValue(this.database.taskDao().getTasks());
         assertEquals(0, tasks.size());
     }
 }
