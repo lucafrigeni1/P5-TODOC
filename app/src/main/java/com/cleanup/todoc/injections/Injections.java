@@ -22,5 +22,4 @@ public class Injections {
         Executor executor = provideExecutor();
         return new ViewModelFactory(dataSourceTask, executor);
     }
-
 }
